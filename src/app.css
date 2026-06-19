@@ -188,3 +188,34 @@ td .row-delta.down { color: var(--down); }
 @keyframes spin { to { transform: rotate(360deg); } }
 .error { color: var(--down); font-size: 12px; line-height: 1.5; }
 .empty { color: var(--text-dim); font-size: 12px; padding: 16px 0; text-align: center; }
+
+/* ---------- Consent + footer ---------- */
+.consent-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+.consent-bar a { color: var(--accent); text-decoration: none; }
+.consent-ok {
+  margin-left: auto;
+  flex: none;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.app-footer { text-align: center; padding: 6px 0 2px; }
+.app-footer a { color: var(--text-dim); font-size: 11px; text-decoration: none; }
+.app-footer a:hover { color: var(--text); }

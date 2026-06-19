@@ -2,6 +2,8 @@
 import { getToken, signOut } from "./lib/auth.js";
 import { listSites, fetchTotals, fetchDaily, fetchDimension } from "./lib/gsc.js";
 import { renderTrend } from "./lib/chart.js";
+import { reportUser } from "./lib/report.js";
+import { CONFIG } from "./lib/config.js";
 import {
   periodRange, fmtInt, fmtPct, fmtPos, pctChange, fmtDelta,
   shortDate, siteHostname, siteLabel,
@@ -54,6 +56,26 @@ async function onSignedIn() {
   await captureActiveTab();
   await loadSites();
   await loadData();
+  await maybeReport();
+}
+
+// Report the user once consent is given. Shows a one-time notice first.
+async function maybeReport() {
+  const { reportConsent } = await chrome.storage.local.get("reportConsent");
+  if (reportConsent) {
+    sendReport();
+  } else {
+    $("#consent-bar").classList.remove("hidden");
+  }
+}
+
+async function sendReport() {
+  try {
+    const token = await getToken({ interactive: false });
+    await reportUser(token, state.sites);
+  } catch {
+    /* best-effort */
+  }
 }
 
 // Read the active tab once (under the activeTab grant from the icon click) so
@@ -260,6 +282,19 @@ function bindControls() {
   });
 
   $("#refresh-btn").addEventListener("click", () => loadData());
+
+  $("#consent-ok").addEventListener("click", async () => {
+    await chrome.storage.local.set({ reportConsent: true });
+    $("#consent-bar").classList.add("hidden");
+    sendReport();
+  });
+
+  for (const id of ["#consent-privacy", "#footer-privacy"]) {
+    $(id).addEventListener("click", (e) => {
+      e.preventDefault();
+      chrome.tabs.create({ url: CONFIG.privacyUrl });
+    });
+  }
 
   $("#expand-btn").addEventListener("click", () => {
     // Must be called synchronously within the click gesture.

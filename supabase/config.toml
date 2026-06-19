@@ -1,0 +1,11 @@
+# Supabase project config (only the parts this project needs).
+# These functions do their own auth (ingest key / admin password), so we turn
+# off the platform's default JWT check.
+
+project_id = "search-console-peek"
+
+[functions.report-user]
+verify_jwt = false
+
+[functions.admin-users]
+verify_jwt = false

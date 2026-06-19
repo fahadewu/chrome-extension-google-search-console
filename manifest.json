@@ -31,12 +31,15 @@
     "sidePanel"
   ],
   "host_permissions": [
-    "https://www.googleapis.com/*"
+    "https://www.googleapis.com/*",
+    "https://*.supabase.co/*"
   ],
   "oauth2": {
     "client_id": "369696173623-jsh0ikr5d2n2mfo0c4ilfqd7dgl9h15n.apps.googleusercontent.com",
     "scopes": [
-      "https://www.googleapis.com/auth/webmasters.readonly"
+      "https://www.googleapis.com/auth/webmasters.readonly",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
     ]
   },
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvXiUOeyCv7AreaMw30RmZ7YQ66oKQo6+dmKE2vZJFRp3VyFiEweNST/bxFUadCdd7zVzT3HucgpsxIixe9KCJI8dkxOSd/9zNG52Z5d7NUP1shO9eYssDLdETddDl8mGX/vRr2UoKO6EZeP+Lv9bXyLCJ6SXclhwHdwGyzEoIB07n7bSHs/NQ/Ls+Bo1hHi3HNJIBOyc30Na6ONMYAMujTIKZ7fu1cF7nrpWDC45LG8UqB/lX1+bYgiO/J5J7bi1iMmHKNQCROx+k/p0mQdwur2Q5+/FFZSzjx0kWIYdD/RIeexHlHEpnljP5RpCk4SpDce1N3veEwAjT5TMeF3IYQIDAQAB"

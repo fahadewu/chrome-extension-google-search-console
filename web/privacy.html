@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — Search Console Peek</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html"><span class="mark">📊</span> Search Console Peek</a>
+      <nav class="nav-links"><a href="index.html">Home</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap doc">
+    <a class="back" href="index.html">← Back</a>
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: <!-- TODO: set date --> June 2026</p>
+
+    <p>
+      This policy explains what the <strong>Search Console Peek</strong> Chrome
+      extension ("the extension", "we", "us") collects, why, and how it is
+      handled. It is operated by Techneth. Questions:
+      <a href="mailto:fahad@techneth.com">fahad@techneth.com</a>.
+    </p>
+
+    <h2>What the extension accesses</h2>
+    <ul>
+      <li>
+        <strong>Your Google Search Console data</strong> — clicks, impressions,
+        CTR, position, top queries and pages for properties you own. This is
+        requested with a <strong>read-only</strong> scope
+        (<code>webmasters.readonly</code>). It is fetched directly from Google
+        and shown to you in the extension. <strong>We do not store your Search
+        Console performance data on our servers.</strong>
+      </li>
+      <li>
+        <strong>Your basic Google profile</strong> — your name, email address,
+        profile picture, and Google account identifier
+        (<code>email</code>, <code>profile</code> scopes).
+      </li>
+      <li>
+        <strong>The active tab's domain</strong> — read only when you open the
+        extension, and only to auto-select a matching property. It is not stored
+        or transmitted.
+      </li>
+    </ul>
+
+    <h2>What we store, and why</h2>
+    <p>
+      So we understand who uses the extension and how, we store the following in
+      our database (hosted on Supabase):
+    </p>
+    <ul>
+      <li>Your name, email, profile picture, and Google account identifier.</li>
+      <li>Usage metadata: number of visits, first-seen and last-seen timestamps.</li>
+      <li>The names/URLs of the Search Console properties you view in the extension.</li>
+    </ul>
+    <p>
+      We collect this only after you acknowledge the in-extension notice. We use
+      it solely to operate, understand, and improve the extension. We do not sell
+      it, and we do not use it for advertising.
+    </p>
+
+    <h2>How your data is shared</h2>
+    <ul>
+      <li><strong>Google</strong> — for authentication and to provide your Search Console data, under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
+      <li><strong>Supabase</strong> — our database provider, which stores the information listed above on our behalf.</li>
+    </ul>
+    <p>
+      Our use of information received from Google APIs adheres to the
+      <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>,
+      including its Limited Use requirements.
+    </p>
+
+    <h2>Data retention &amp; your choices</h2>
+    <ul>
+      <li>We keep your record until you ask us to delete it.</li>
+      <li>
+        You can request access to or deletion of your data at any time by
+        emailing <a href="mailto:fahad@techneth.com">fahad@techneth.com</a>.
+      </li>
+      <li>
+        You can revoke the extension's access entirely at
+        <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">your Google Account permissions</a>.
+      </li>
+    </ul>
+
+    <h2>Security</h2>
+    <p>
+      Data is transmitted over HTTPS and stored with access restricted to the
+      extension's backend functions. Your Search Console access token is never
+      sent to our servers.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      We may update this policy; material changes will be reflected by the date
+      above.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>© <span id="year"></span> Techneth.</span>
+      <div class="footer-links"><a href="index.html">Home</a></div>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

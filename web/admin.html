@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — Search Console Peek</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="admin-body">
+  <!-- Login -->
+  <div id="login" class="login-wrap">
+    <div class="login-card">
+      <h1>Admin</h1>
+      <p>Search Console Peek — user dashboard</p>
+      <input id="pw" class="field" type="password" placeholder="Admin password" autocomplete="current-password" />
+      <button id="login-btn" class="btn btn-primary" style="width:100%; justify-content:center;">Sign in</button>
+      <p id="login-error" class="login-error"></p>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dash" style="display:none;">
+    <div class="admin-top">
+      <div class="wrap">
+        <div class="admin-title"><span class="mark" style="width:24px;height:24px;border-radius:6px;background:var(--accent);display:grid;place-items:center;color:#fff;">📊</span> Search Console Peek · Users</div>
+        <button id="logout-btn" class="btn btn-ghost">Sign out</button>
+      </div>
+    </div>
+
+    <div class="wrap" style="padding-bottom:64px;">
+      <div class="stat-row">
+        <div class="stat"><div class="k">Total users</div><div class="v" id="stat-users">—</div></div>
+        <div class="stat"><div class="k">Total visits</div><div class="v" id="stat-visits">—</div></div>
+      </div>
+
+      <div class="toolbar">
+        <input id="search" class="field" style="margin:0;" placeholder="Search name, email or property…" />
+        <button id="refresh-btn" class="btn btn-ghost">Refresh</button>
+      </div>
+
+      <div class="table-card">
+        <table class="user-table">
+          <thead>
+            <tr>
+              <th data-sort="name">User</th>
+              <th data-sort="visit_count">Visits</th>
+              <th data-sort="properties">Properties</th>
+              <th data-sort="first_seen">First seen</th>
+              <th data-sort="last_seen">Last seen</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div id="empty" class="empty-state" style="display:none;">No users yet.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

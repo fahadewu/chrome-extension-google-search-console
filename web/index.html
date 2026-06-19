@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search Console Peek — Google Search Console, at a glance</title>
+  <meta name="description" content="A Chrome extension to check your Google Search Console performance — top queries, pages and trends — without leaving the page you're on." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="/">
+        <span class="mark">📊</span>
+        Search Console Peek
+      </a>
+      <nav class="nav-links">
+        <a class="hide-sm" href="#how">How it works</a>
+        <a class="hide-sm" href="#features">Features</a>
+        <a class="hide-sm" href="#team">Team</a>
+        <a class="btn btn-primary" href="#get">Add to Chrome</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <span class="eyebrow">Chrome extension</span>
+        <h1>Your Search Console numbers, without the round trip.</h1>
+        <p class="lead">
+          Stop opening Google Search Console a dozen times a day. Peek at your
+          clicks, impressions, top queries and trends right from your toolbar —
+          for whichever site you're already looking at.
+        </p>
+        <div class="hero-cta" id="get">
+          <a class="btn btn-primary" href="#" id="store-link">Add to Chrome</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <p class="hero-note">Read-only access to your Search Console data. Your data stays in Google.</p>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="block" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">How it works</span>
+          <h2>Three steps. No dashboards to dig through.</h2>
+          <p>Install once, sign in with the Google account that owns your properties, and you're set.</p>
+        </div>
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="num">1</div>
+            <h3>Sign in with Google</h3>
+            <p>Connect the Google account that has access to your Search Console properties. One-time, read-only consent.</p>
+          </div>
+          <div class="card">
+            <div class="num">2</div>
+            <h3>It finds your site</h3>
+            <p>Open the popup on any page and it auto-selects the matching property. Switch sites anytime from the dropdown.</p>
+          </div>
+          <div class="card">
+            <div class="num">3</div>
+            <h3>Read the numbers</h3>
+            <p>Clicks, impressions, CTR and position — with trends and top queries — in the popup or Chrome's side panel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="block" id="features" style="background: var(--bg-soft);">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">What you get</span>
+          <h2>Everything you check first, in one place.</h2>
+        </div>
+        <div class="grid grid-4">
+          <div class="card feature">
+            <span class="ico">🔎</span>
+            <div><h3>Top queries &amp; pages</h3><p>Sortable tables of your best-performing search queries and landing pages.</p></div>
+          </div>
+          <div class="card feature">
+            <span class="ico">📈</span>
+            <div><h3>Performance trend</h3><p>Clicks and impressions over 7, 28 or 90 days, drawn right in the panel.</p></div>
+          </div>
+          <div class="card feature">
+            <span class="ico">🌐</span>
+            <div><h3>Current-tab insights</h3><p>The property for the site you're viewing is selected automatically.</p></div>
+          </div>
+          <div class="card feature">
+            <span class="ico">⚖️</span>
+            <div><h3>Compare periods</h3><p>This period vs. the previous one, with clear percentage deltas.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team / developers -->
+    <section class="block devs" id="team">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">Who builds it</span>
+          <h2>Made by the team at Techneth.</h2>
+          <p>We build practical tools that take the busywork out of SEO and the web. <!-- TODO: edit this line --></p>
+        </div>
+        <div class="dev-grid">
+          <!-- TODO: replace names, roles and links with your real team -->
+          <div class="dev">
+            <div class="avatar">F</div>
+            <div class="meta">
+              <strong>Fahad</strong>
+              <span>Founder &amp; Developer · <a href="mailto:fahad@techneth.com">fahad@techneth.com</a></span>
+            </div>
+          </div>
+          <div class="dev">
+            <div class="avatar">T</div>
+            <div class="meta">
+              <strong>Techneth</strong>
+              <span>Web &amp; software studio · <a href="https://techneth.com" target="_blank" rel="noopener">techneth.com</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>© <span id="year"></span> Techneth. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy policy</a>
+        <a href="mailto:fahad@techneth.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    // TODO: once published, point this at your Chrome Web Store listing URL.
+    // document.getElementById("store-link").href = "https://chromewebstore.google.com/detail/<id>";
+  </script>
+</body>
+</html>

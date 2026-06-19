@@ -20,12 +20,23 @@ src/
     gsc.js             Search Console API client
     chart.js           Dependency-free SVG trend chart
     format.js          Date math + number formatting
+    report.js          Reports the signed-in user to the backend
+    config.js          Backend URL / ingest key / privacy link  ← EDIT THIS
 icons/                 Generated PNG icons
-scripts/make_icons.py  Regenerate the icons
+scripts/               make_icons.py, pin-key.sh, build-zip.sh
+supabase/              Backend: schema + edge functions (see supabase/README.md)
+web/                   Landing page, privacy policy, admin dashboard (see web/README.md)
 ```
 
-No external libraries or CDNs — everything is local, which keeps it
-Content-Security-Policy clean and easy to pass Web Store review.
+The extension itself uses no external libraries or CDNs — everything is local,
+which keeps it Content-Security-Policy clean and easy to pass Web Store review.
+
+> **User analytics + website:** This project also records who uses the extension
+> (name, email, usage, properties viewed) and ships a landing page + admin
+> dashboard. Set those up with **[`supabase/README.md`](supabase/README.md)**
+> and **[`web/README.md`](web/README.md)**. Until you fill in
+> `src/lib/config.js`, the extension simply skips reporting and works as a pure
+> viewer.
 
 ---
 
@@ -60,8 +71,15 @@ so you can create the OAuth client against it right now.
 
 1. **APIs & Services → OAuth consent screen.**
 2. User type **External**, fill in the app name, your email, etc.
-3. Add the scope: `https://www.googleapis.com/auth/webmasters.readonly`
+3. Add these scopes:
+   - `https://www.googleapis.com/auth/webmasters.readonly`
+   - `https://www.googleapis.com/auth/userinfo.email`
+   - `https://www.googleapis.com/auth/userinfo.profile`
 4. While testing, add your Google account under **Test users**.
+
+> The `email` / `profile` scopes are what let the extension know *who* is using
+> it (for the user dashboard). They're non-sensitive. If you change scopes after
+> users have already signed in, they'll be asked to re-consent once.
 
 ### 4. Create the OAuth client ID
 

@@ -16,6 +16,12 @@
 
   <!-- Main dashboard -->
   <section id="dashboard" class="screen hidden">
+    <div id="consent-bar" class="consent-bar hidden">
+      <span>We store your name, email and usage to understand who uses this tool.
+        <a id="consent-privacy" href="#" target="_blank" rel="noopener">Privacy</a>.</span>
+      <button id="consent-ok" class="consent-ok">Got it</button>
+    </div>
+
     <header class="topbar">
       <select id="site-select" class="site-select" title="Property"></select>
       <div class="topbar-actions">
@@ -68,6 +74,10 @@
         </div>
         <div id="table-wrap" class="table-wrap"></div>
       </div>
+
+      <footer class="app-footer">
+        <a id="footer-privacy" href="#" target="_blank" rel="noopener">Privacy policy</a>
+      </footer>
     </div>
   </section>
 </div>
