@@ -160,5 +160,5 @@ $$;
 -- To add a future product later, just insert another row here.
 -- ---------------------------------------------------------------------------
 insert into public.apps (slug, name, ingest_key)
-values ('search-console-peek', 'Search Console Peek', 'REPLACE_WITH_INGEST_KEY')
-on conflict (slug) do nothing;
+values ('search-console-peek', 'Search Console Peek', 'b22d3298f81578ee9a517572ca952bc6c50ed199af562ca9')
+on conflict (slug) do update set ingest_key = excluded.ingest_key;
