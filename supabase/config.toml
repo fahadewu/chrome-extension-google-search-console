@@ -4,8 +4,8 @@
 
 project_id = "search-console-peek"
 
-[functions.report-user]
+[functions.ingest]
 verify_jwt = false
 
-[functions.admin-users]
+[functions.admin]
 verify_jwt = false

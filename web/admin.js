@@ -1,20 +1,21 @@
 // Admin dashboard logic. Authenticates with the admin password against the
-// `admin-users` edge function, then renders the user table.
+// `admin` edge function, lists apps, then renders the selected app's users.
 (function () {
   const $ = (s) => document.querySelector(s);
   const base = window.ADMIN_CONFIG?.functionsBase || "";
 
   let users = [];
+  let currentApp = null;
   let sort = { col: "last_seen", dir: -1 };
 
   // Keep the password only for this tab session.
   let password = sessionStorage.getItem("scp_admin_pw") || "";
 
-  if (password) tryLoad(password);
+  if (password) start(password);
 
   $("#login-btn").addEventListener("click", () => {
     const pw = $("#pw").value.trim();
-    if (pw) tryLoad(pw);
+    if (pw) start(pw);
   });
   $("#pw").addEventListener("keydown", (e) => {
     if (e.key === "Enter") $("#login-btn").click();
@@ -23,8 +24,9 @@
     sessionStorage.removeItem("scp_admin_pw");
     location.reload();
   });
-  $("#refresh-btn").addEventListener("click", () => tryLoad(password));
+  $("#refresh-btn").addEventListener("click", () => loadUsers(currentApp));
   $("#search").addEventListener("input", render);
+  $("#app-select").addEventListener("change", (e) => loadUsers(e.target.value));
 
   document.querySelectorAll("th[data-sort]").forEach((th) => {
     th.addEventListener("click", () => {
@@ -34,31 +36,69 @@
     });
   });
 
-  async function tryLoad(pw) {
+  // Validate password + load the app list.
+  async function start(pw) {
     $("#login-error").textContent = "";
     try {
-      const res = await fetch(`${base}/admin-users`, {
-        headers: { "x-admin-password": pw },
-      });
+      const res = await api("/admin", pw);
       if (res.status === 401) {
         $("#login-error").textContent = "Wrong password.";
         return;
       }
       if (!res.ok) throw new Error(`Server error ${res.status}`);
-      const data = await res.json();
+      const { apps } = await res.json();
 
       password = pw;
       sessionStorage.setItem("scp_admin_pw", pw);
-      users = data.users || [];
+
+      const select = $("#app-select");
+      select.innerHTML = "";
+      for (const a of apps || []) {
+        const opt = document.createElement("option");
+        opt.value = a.slug;
+        opt.textContent = `${a.name} (${a.user_count})`;
+        select.appendChild(opt);
+      }
 
       $("#login").style.display = "none";
       $("#dash").style.display = "block";
+
+      if (apps && apps.length) {
+        select.value = apps[0].slug;
+        await loadUsers(apps[0].slug);
+      } else {
+        users = [];
+        render();
+      }
+    } catch (e) {
+      $("#login-error").textContent = String(e.message || e);
+    }
+  }
+
+  async function loadUsers(appSlug) {
+    if (!appSlug) return;
+    currentApp = appSlug;
+    try {
+      const res = await api(`/admin?app=${encodeURIComponent(appSlug)}`, password);
+      if (!res.ok) throw new Error(`Server error ${res.status}`);
+      const data = await res.json();
+      users = data.users || [];
       $("#stat-users").textContent = data.stats?.total ?? users.length;
       $("#stat-visits").textContent = (data.stats?.totalVisits ?? 0).toLocaleString();
       render();
     } catch (e) {
-      $("#login-error").textContent = String(e.message || e);
+      $("#empty").style.display = "block";
+      $("#empty").textContent = String(e.message || e);
     }
+  }
+
+  function api(path, pw) {
+    return fetch(`${base}${path}`, { headers: { "x-admin-password": pw } });
+  }
+
+  function props(u) {
+    const m = u.metadata || {};
+    return Array.isArray(m.properties) ? m.properties : [];
   }
 
   function render() {
@@ -67,7 +107,7 @@
 
     if (q) {
       rows = rows.filter((u) =>
-        [u.name, u.email, ...(u.properties || [])]
+        [u.name, u.email, ...props(u)]
           .filter(Boolean).join(" ").toLowerCase().includes(q)
       );
     }
@@ -75,7 +115,7 @@
     const { col, dir } = sort;
     rows.sort((a, b) => {
       let av = a[col], bv = b[col];
-      if (col === "properties") { av = (a.properties || []).length; bv = (b.properties || []).length; }
+      if (col === "properties") { av = props(a).length; bv = props(b).length; }
       if (col === "name") { av = (a.name || a.email || "").toLowerCase(); bv = (b.name || b.email || "").toLowerCase(); }
       if (av < bv) return -dir;
       if (av > bv) return dir;
@@ -85,12 +125,13 @@
     const tbody = $("#rows");
     tbody.innerHTML = "";
     $("#empty").style.display = rows.length ? "none" : "block";
+    if (!rows.length) $("#empty").textContent = "No users yet.";
 
     for (const u of rows) {
       const tr = document.createElement("tr");
       tr.appendChild(userCell(u));
       tr.appendChild(td(String(u.visit_count ?? 0)));
-      tr.appendChild(propsCell(u.properties || []));
+      tr.appendChild(propsCell(props(u)));
       tr.appendChild(td(fmtDate(u.first_seen), "muted"));
       tr.appendChild(td(fmtDate(u.last_seen), "muted"));
       tbody.appendChild(tr);
@@ -131,25 +172,25 @@
     return cell;
   }
 
-  function propsCell(props) {
+  function propsCell(list) {
     const cell = document.createElement("td");
-    if (props.length === 0) {
+    if (list.length === 0) {
       cell.innerHTML = '<span class="muted">—</span>';
       return cell;
     }
     const chips = document.createElement("div");
     chips.className = "chips";
-    props.slice(0, 3).forEach((p) => {
+    list.slice(0, 3).forEach((p) => {
       const chip = document.createElement("span");
       chip.className = "chip";
-      chip.textContent = shorten(p);
+      chip.textContent = shorten(String(p));
       chips.appendChild(chip);
     });
-    if (props.length > 3) {
+    if (list.length > 3) {
       const more = document.createElement("span");
       more.className = "prop-count";
-      more.textContent = `+${props.length - 3} more`;
-      more.title = props.join("\n");
+      more.textContent = `+${list.length - 3} more`;
+      more.title = list.join("\n");
       chips.appendChild(more);
     }
     cell.appendChild(chips);

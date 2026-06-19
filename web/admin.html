@@ -22,8 +22,11 @@
   <div id="dash" style="display:none;">
     <div class="admin-top">
       <div class="wrap">
-        <div class="admin-title"><span class="mark" style="width:24px;height:24px;border-radius:6px;background:var(--accent);display:grid;place-items:center;color:#fff;">📊</span> Search Console Peek · Users</div>
-        <button id="logout-btn" class="btn btn-ghost">Sign out</button>
+        <div class="admin-title"><span class="mark" style="width:24px;height:24px;border-radius:6px;background:var(--accent);display:grid;place-items:center;color:#fff;">📊</span> User dashboard</div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <select id="app-select" class="field" style="margin:0; min-width:200px;"></select>
+          <button id="logout-btn" class="btn btn-ghost">Sign out</button>
+        </div>
       </div>
     </div>
 
@@ -44,7 +47,7 @@
             <tr>
               <th data-sort="name">User</th>
               <th data-sort="visit_count">Visits</th>
-              <th data-sort="properties">Properties</th>
+              <th data-sort="properties">Properties / tags</th>
               <th data-sort="first_seen">First seen</th>
               <th data-sort="last_seen">Last seen</th>
             </tr>

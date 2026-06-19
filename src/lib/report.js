@@ -18,18 +18,19 @@ export async function reportUser(token, properties) {
   if (!reportingConfigured()) return;
   try {
     const p = await fetchProfile(token);
-    await fetch(CONFIG.reportUrl, {
+    await fetch(CONFIG.ingestUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-ingest-key": CONFIG.ingestKey,
       },
       body: JSON.stringify({
-        sub: p.sub,
+        app: CONFIG.appSlug,
+        external_id: p.sub,
         email: p.email,
         name: p.name || null,
         avatar_url: p.picture || null,
-        properties: properties || [],
+        metadata: { properties: properties || [] },
       }),
     });
   } catch {
