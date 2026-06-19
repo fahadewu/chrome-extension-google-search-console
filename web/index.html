@@ -1,146 +1,314 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Search Console Peek — Google Search Console, at a glance</title>
-  <meta name="description" content="A Chrome extension to check your Google Search Console performance — top queries, pages and trends — without leaving the page you're on." />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Search Console Peek — Your Search Console data, a click away</title>
+<meta name="description" content="A Chrome extension that shows your Google Search Console performance — top queries, pages and trends — in your toolbar, without opening Search Console."/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#005bbf",
+          "primary-container": "#1a73e8",
+          "on-primary": "#ffffff",
+          "primary-fixed": "#d8e2ff",
+          "primary-fixed-dim": "#adc7ff",
+          "secondary": "#465f87",
+          "tertiary": "#006d2c",
+          "background": "#f7f9ff",
+          "surface": "#f7f9ff",
+          "surface-bright": "#ffffff",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#f1f4fa",
+          "surface-container": "#ebeef4",
+          "surface-container-high": "#e5e8ee",
+          "on-surface": "#181c20",
+          "on-surface-variant": "#414754",
+          "on-background": "#181c20",
+          "outline": "#727785",
+          "outline-variant": "#c1c6d6",
+          "error": "#ba1a1a"
+        },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px" },
+        spacing: { "container-max": "1200px", "margin-desktop": "40px", "gutter": "24px", "stack-lg": "32px", "stack-md": "16px", "stack-sm": "8px" },
+        fontFamily: { "sans": ["Hanken Grotesk", "ui-sans-serif", "system-ui", "sans-serif"] },
+        fontSize: {
+          "display-lg": ["52px", { "lineHeight": "58px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+          "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+          "headline-md": ["22px", { "lineHeight": "30px", "fontWeight": "600" }],
+          "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+          "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+          "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+          "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+          "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; }
+  .fill .material-symbols-outlined, .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+</style>
 </head>
-<body>
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="/">
-        <span class="mark">📊</span>
-        Search Console Peek
-      </a>
-      <nav class="nav-links">
-        <a class="hide-sm" href="#how">How it works</a>
-        <a class="hide-sm" href="#features">Features</a>
-        <a class="hide-sm" href="#team">Team</a>
-        <a class="btn btn-primary" href="#get">Add to Chrome</a>
-      </nav>
-    </div>
-  </header>
+<body class="bg-background text-on-background">
 
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="wrap hero-inner">
-        <span class="eyebrow">Chrome extension</span>
-        <h1>Your Search Console numbers, without the round trip.</h1>
-        <p class="lead">
-          Stop opening Google Search Console a dozen times a day. Peek at your
-          clicks, impressions, top queries and trends right from your toolbar —
-          for whichever site you're already looking at.
+<!-- Header -->
+<header id="site-header" class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant transition-shadow">
+  <div class="max-w-container-max mx-auto px-margin-desktop flex items-center justify-between h-16">
+    <a href="#top" class="flex items-center gap-2">
+      <span class="material-symbols-outlined fill text-primary text-[26px]">analytics</span>
+      <span class="text-headline-sm font-bold text-primary">Search Console Peek</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-gutter">
+      <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#how-it-works">How it works</a>
+      <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#features">Features</a>
+      <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#about">About</a>
+    </nav>
+    <a id="store-link-top" href="#get" class="bg-primary text-on-primary text-label-md px-5 py-2 rounded-lg hover:shadow-md active:scale-95 transition">Add to Chrome</a>
+  </div>
+</header>
+
+<main id="top" class="pt-16">
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden pt-20 pb-28 md:pt-28">
+    <div class="absolute -top-16 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+    <div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center relative">
+      <div class="text-center lg:text-left">
+        <span class="inline-block text-label-sm uppercase tracking-wider text-primary bg-primary-fixed border border-primary-fixed-dim rounded-full px-3 py-1 mb-5">Chrome extension</span>
+        <h1 class="text-display-lg text-on-surface mb-stack-md">Your Search Console numbers, <span class="text-primary">a click away.</span></h1>
+        <p class="text-body-lg text-on-surface-variant mb-stack-lg max-w-xl mx-auto lg:mx-0">
+          Stop reopening Google Search Console all day. Sign in once with Google and read your clicks, impressions, top queries and trends right from your toolbar — for whichever site you're already on.
         </p>
-        <div class="hero-cta" id="get">
-          <a class="btn btn-primary" href="#" id="store-link">Add to Chrome</a>
-          <a class="btn btn-ghost" href="#how">See how it works</a>
+        <div id="get" class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a id="store-link" href="#" class="flex items-center justify-center gap-2 bg-primary text-on-primary px-7 py-3.5 rounded-lg text-headline-sm hover:bg-primary/90 shadow-lg active:scale-95 transition">
+            <span class="material-symbols-outlined">extension</span> Add to Chrome
+          </a>
+          <a href="#how-it-works" class="flex items-center justify-center gap-2 border-2 border-primary text-primary px-7 py-3.5 rounded-lg text-headline-sm hover:bg-primary/5 active:scale-95 transition">See how it works</a>
         </div>
-        <p class="hero-note">Read-only access to your Search Console data. Your data stays in Google.</p>
+        <p class="text-label-sm text-on-surface-variant mt-4">Read-only access · Your data stays in Google · Free</p>
       </div>
-    </section>
 
-    <!-- How it works -->
-    <section class="block" id="how">
-      <div class="wrap">
-        <div class="section-head">
-          <span class="kicker">How it works</span>
-          <h2>Three steps. No dashboards to dig through.</h2>
-          <p>Install once, sign in with the Google account that owns your properties, and you're set.</p>
-        </div>
-        <div class="grid grid-3">
-          <div class="card">
-            <div class="num">1</div>
-            <h3>Sign in with Google</h3>
-            <p>Connect the Google account that has access to your Search Console properties. One-time, read-only consent.</p>
-          </div>
-          <div class="card">
-            <div class="num">2</div>
-            <h3>It finds your site</h3>
-            <p>Open the popup on any page and it auto-selects the matching property. Switch sites anytime from the dropdown.</p>
-          </div>
-          <div class="card">
-            <div class="num">3</div>
-            <h3>Read the numbers</h3>
-            <p>Clicks, impressions, CTR and position — with trends and top queries — in the popup or Chrome's side panel.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features -->
-    <section class="block" id="features" style="background: var(--bg-soft);">
-      <div class="wrap">
-        <div class="section-head">
-          <span class="kicker">What you get</span>
-          <h2>Everything you check first, in one place.</h2>
-        </div>
-        <div class="grid grid-4">
-          <div class="card feature">
-            <span class="ico">🔎</span>
-            <div><h3>Top queries &amp; pages</h3><p>Sortable tables of your best-performing search queries and landing pages.</p></div>
-          </div>
-          <div class="card feature">
-            <span class="ico">📈</span>
-            <div><h3>Performance trend</h3><p>Clicks and impressions over 7, 28 or 90 days, drawn right in the panel.</p></div>
-          </div>
-          <div class="card feature">
-            <span class="ico">🌐</span>
-            <div><h3>Current-tab insights</h3><p>The property for the site you're viewing is selected automatically.</p></div>
-          </div>
-          <div class="card feature">
-            <span class="ico">⚖️</span>
-            <div><h3>Compare periods</h3><p>This period vs. the previous one, with clear percentage deltas.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Team / developers -->
-    <section class="block devs" id="team">
-      <div class="wrap">
-        <div class="section-head">
-          <span class="kicker">Who builds it</span>
-          <h2>Made by the team at Techneth.</h2>
-          <p>We build practical tools that take the busywork out of SEO and the web. <!-- TODO: edit this line --></p>
-        </div>
-        <div class="dev-grid">
-          <!-- TODO: replace names, roles and links with your real team -->
-          <div class="dev">
-            <div class="avatar">F</div>
-            <div class="meta">
-              <strong>Fahad</strong>
-              <span>Founder &amp; Developer · <a href="mailto:fahad@techneth.com">fahad@techneth.com</a></span>
+      <!-- Self-contained browser + extension mockup -->
+      <div class="relative flex justify-center">
+        <div class="relative z-10 w-full max-w-[440px] bg-surface-container-high rounded-xl shadow-2xl border border-outline-variant overflow-hidden">
+          <!-- Browser chrome -->
+          <div class="h-10 bg-surface-container-high border-b border-outline-variant flex items-center px-3 gap-2">
+            <div class="flex gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
             </div>
+            <div class="flex-grow bg-white h-6 rounded-full px-3 text-[10px] flex items-center text-on-surface-variant truncate mx-3">example.com/blog</div>
+            <span class="material-symbols-outlined fill text-primary text-[18px]">analytics</span>
           </div>
-          <div class="dev">
-            <div class="avatar">T</div>
-            <div class="meta">
-              <strong>Techneth</strong>
-              <span>Web &amp; software studio · <a href="https://techneth.com" target="_blank" rel="noopener">techneth.com</a></span>
+          <!-- Extension panel (mirrors the real dark UI) -->
+          <div class="bg-[#0f1115] p-3.5 text-[#e6e9ef]" style="font-size:12px;">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="flex-1 bg-[#181b22] border border-[#2a2f3a] rounded-lg px-2.5 py-1.5 flex items-center justify-between">
+                <span>https://example.com/</span><span class="text-[#9aa3b2]">▾</span>
+              </div>
+              <div class="w-7 h-7 rounded-lg bg-[#181b22] border border-[#2a2f3a] grid place-items-center text-[#9aa3b2]">↻</div>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="inline-flex gap-0.5 bg-[#181b22] border border-[#2a2f3a] rounded-lg p-0.5">
+                <span class="px-2.5 py-1 rounded-md text-[#9aa3b2]">7d</span>
+                <span class="px-2.5 py-1 rounded-md bg-[#1f232c]">28d</span>
+                <span class="px-2.5 py-1 rounded-md text-[#9aa3b2]">90d</span>
+              </div>
+              <span class="text-[#9aa3b2]">☑ Compare</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mb-3">
+              <div class="bg-[#181b22] border border-[#2a2f3a] rounded-lg p-2.5"><div class="text-[10px] uppercase text-[#9aa3b2]">Clicks</div><div class="text-lg font-bold">1,240</div><div class="text-[10px] text-[#34d399]">▲ 12.4%</div></div>
+              <div class="bg-[#181b22] border border-[#2a2f3a] rounded-lg p-2.5"><div class="text-[10px] uppercase text-[#9aa3b2]">Impressions</div><div class="text-lg font-bold">48.3k</div><div class="text-[10px] text-[#34d399]">▲ 8.1%</div></div>
+              <div class="bg-[#181b22] border border-[#2a2f3a] rounded-lg p-2.5"><div class="text-[10px] uppercase text-[#9aa3b2]">CTR</div><div class="text-lg font-bold">2.6%</div><div class="text-[10px] text-[#f87171]">▼ 3.0%</div></div>
+              <div class="bg-[#181b22] border border-[#2a2f3a] rounded-lg p-2.5"><div class="text-[10px] uppercase text-[#9aa3b2]">Avg position</div><div class="text-lg font-bold">14.2</div><div class="text-[10px] text-[#34d399]">▲ 1.3</div></div>
+            </div>
+            <div class="bg-[#181b22] border border-[#2a2f3a] rounded-lg p-2.5 mb-3">
+              <div class="flex items-center justify-between mb-1"><span class="font-semibold">Trend</span><span class="text-[10px] text-[#9aa3b2]"><span class="text-[#4f8cff]">●</span> Clicks &nbsp; <span class="text-[#34d399]">●</span> Impr.</span></div>
+              <svg viewBox="0 0 320 70" class="w-full h-[70px]">
+                <polygon points="0,70 0,40 50,44 100,30 150,34 200,20 260,26 320,12 320,70" fill="#34d399" opacity="0.10"/>
+                <polyline points="0,40 50,44 100,30 150,34 200,20 260,26 320,12" fill="none" stroke="#34d399" stroke-width="2"/>
+                <polyline points="0,58 50,55 100,50 150,52 200,44 260,46 320,38" fill="none" stroke="#4f8cff" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="bg-[#181b22] border border-[#2a2f3a] rounded-lg p-2.5">
+              <div class="flex justify-between text-[10px] text-[#9aa3b2] pb-1.5 border-b border-[#2a2f3a]"><span>Query</span><span>Clicks</span></div>
+              <div class="flex justify-between py-1.5 border-b border-[#2a2f3a]"><span class="truncate pr-2">best running shoes</span><span>312 <span class="text-[#34d399] text-[10px]">+9%</span></span></div>
+              <div class="flex justify-between py-1.5 border-b border-[#2a2f3a]"><span class="truncate pr-2">trail shoes review</span><span>188 <span class="text-[#34d399] text-[10px]">+4%</span></span></div>
+              <div class="flex justify-between pt-1.5"><span class="truncate pr-2">marathon training</span><span>141 <span class="text-[#f87171] text-[10px]">−2%</span></span></div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap footer-row">
-      <span>© <span id="year"></span> Techneth. All rights reserved.</span>
-      <div class="footer-links">
-        <a href="privacy.html">Privacy policy</a>
-        <a href="mailto:fahad@techneth.com">Contact</a>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    // TODO: once published, point this at your Chrome Web Store listing URL.
-    // document.getElementById("store-link").href = "https://chromewebstore.google.com/detail/<id>";
-  </script>
+  <!-- How it works -->
+  <section id="how-it-works" class="py-24 bg-surface-container-lowest border-t border-outline-variant">
+    <div class="max-w-container-max mx-auto px-margin-desktop">
+      <div class="text-center mb-16">
+        <span class="text-primary text-label-md uppercase tracking-wider">How it works</span>
+        <h2 class="text-headline-lg text-on-surface mt-2">Three steps. No dashboards to dig through.</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <div class="bg-surface-bright border border-outline-variant rounded-2xl p-8">
+          <div class="w-10 h-10 rounded-full bg-primary text-on-primary grid place-items-center font-bold mb-4">1</div>
+          <h3 class="text-headline-sm mb-2">Sign in with Google</h3>
+          <p class="text-on-surface-variant text-body-md">One-time, read-only consent through Google's official sign-in. We never see your password, and you can revoke access anytime.</p>
+        </div>
+        <div class="bg-surface-bright border border-outline-variant rounded-2xl p-8">
+          <div class="w-10 h-10 rounded-full bg-primary text-on-primary grid place-items-center font-bold mb-4">2</div>
+          <h3 class="text-headline-sm mb-2">It finds your site</h3>
+          <p class="text-on-surface-variant text-body-md">Open the popup on any page and it auto-selects the matching Search Console property. Switch sites anytime from the dropdown.</p>
+        </div>
+        <div class="bg-surface-bright border border-outline-variant rounded-2xl p-8">
+          <div class="w-10 h-10 rounded-full bg-primary text-on-primary grid place-items-center font-bold mb-4">3</div>
+          <h3 class="text-headline-sm mb-2">Read it in a peek</h3>
+          <p class="text-on-surface-variant text-body-md">Clicks, impressions, CTR, position, trends and top queries — in the popup, or docked in Chrome's side panel while you browse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why / workflow -->
+  <section class="py-24">
+    <div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center">
+      <div>
+        <span class="text-primary text-label-md uppercase tracking-wider">Why use it</span>
+        <h2 class="text-headline-lg text-on-surface mt-2 mb-stack-md">Same data. None of the round trip.</h2>
+        <p class="text-on-surface-variant text-body-lg mb-stack-lg">
+          Search Console Peek reads the <strong>same official Google Search Console data</strong> you'd see on the web — it just saves you the tab-switching. Check the site you're looking at in one click instead of opening Search Console, picking the property, and waiting for it to load.
+        </p>
+        <div class="flex flex-col gap-5">
+          <div class="flex gap-4"><span class="material-symbols-outlined text-tertiary">language</span><div><h4 class="text-headline-sm">Current-tab aware</h4><p class="text-on-surface-variant">The property for the site you're viewing is selected automatically.</p></div></div>
+          <div class="flex gap-4"><span class="material-symbols-outlined text-tertiary">dock_to_right</span><div><h4 class="text-headline-sm">Popup or side panel</h4><p class="text-on-surface-variant">Glance in the popup, or dock it to the side panel so it stays open while you work.</p></div></div>
+          <div class="flex gap-4"><span class="material-symbols-outlined text-tertiary">compare_arrows</span><div><h4 class="text-headline-sm">Compare periods</h4><p class="text-on-surface-variant">This period vs. the previous one, with clear percentage deltas on every metric.</p></div></div>
+        </div>
+      </div>
+      <!-- before/after workflow, honest framing -->
+      <div class="grid grid-cols-1 gap-4">
+        <div class="p-6 rounded-xl border border-outline-variant bg-surface-container-high opacity-70">
+          <div class="flex justify-between items-center mb-3"><span class="text-label-sm uppercase tracking-wider text-on-surface-variant">Without the extension</span><span class="material-symbols-outlined text-on-surface-variant">open_in_new</span></div>
+          <ul class="text-body-md text-on-surface-variant space-y-1.5">
+            <li>· Open Search Console in a new tab</li>
+            <li>· Find and select the right property</li>
+            <li>· Wait, set the date range, scroll</li>
+            <li>· Lose your place on the page you were on</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-xl border-2 border-primary bg-surface-bright shadow-xl relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-primary text-on-primary px-3 py-1 text-[10px] font-bold uppercase">In your toolbar</div>
+          <div class="flex justify-between items-center mb-3"><span class="text-label-sm uppercase tracking-wider text-primary font-bold">With Search Console Peek</span><span class="material-symbols-outlined text-tertiary">bolt</span></div>
+          <ul class="text-body-md text-on-surface space-y-1.5">
+            <li class="flex gap-2"><span class="material-symbols-outlined text-tertiary text-[18px]">check</span> Click the icon — the right site is already loaded</li>
+            <li class="flex gap-2"><span class="material-symbols-outlined text-tertiary text-[18px]">check</span> Clicks, impressions, trends, top queries at a glance</li>
+            <li class="flex gap-2"><span class="material-symbols-outlined text-tertiary text-[18px]">check</span> Stay on the page you were already reading</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-24 bg-surface-container-low border-y border-outline-variant">
+    <div class="max-w-container-max mx-auto px-margin-desktop">
+      <div class="text-center mb-16">
+        <span class="text-primary text-label-md uppercase tracking-wider">Features</span>
+        <h2 class="text-headline-lg text-on-surface mt-2">Everything you check first, in one place.</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <div class="p-8 bg-surface-bright border border-outline-variant rounded-xl hover:shadow-lg transition group">
+          <div class="w-12 h-12 bg-primary/10 text-primary rounded-lg grid place-items-center mb-4 group-hover:bg-primary group-hover:text-on-primary transition-colors"><span class="material-symbols-outlined fill">dashboard</span></div>
+          <h3 class="text-headline-sm mb-2">Glanceable dashboard</h3>
+          <p class="text-on-surface-variant text-body-md">Clicks, impressions, CTR and position as summary cards, with a clicks/impressions trend over 7, 28 or 90 days.</p>
+        </div>
+        <div class="p-8 bg-surface-bright border border-outline-variant rounded-xl hover:shadow-lg transition group">
+          <div class="w-12 h-12 bg-primary/10 text-primary rounded-lg grid place-items-center mb-4 group-hover:bg-primary group-hover:text-on-primary transition-colors"><span class="material-symbols-outlined fill">table_rows</span></div>
+          <h3 class="text-headline-sm mb-2">Top queries &amp; pages</h3>
+          <p class="text-on-surface-variant text-body-md">Sortable tables of your best queries, landing pages, countries and devices — with per-row change vs. the previous period.</p>
+        </div>
+        <div class="p-8 bg-surface-bright border border-outline-variant rounded-xl hover:shadow-lg transition group">
+          <div class="w-12 h-12 bg-primary/10 text-primary rounded-lg grid place-items-center mb-4 group-hover:bg-primary group-hover:text-on-primary transition-colors"><span class="material-symbols-outlined fill">verified_user</span></div>
+          <h3 class="text-headline-sm mb-2">Privacy-first OAuth</h3>
+          <p class="text-on-surface-variant text-body-md">Read-only Search Console scope through Google's official sign-in. Your data stays in Google; revoke access anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / team -->
+  <section id="about" class="py-24">
+    <div class="max-w-container-max mx-auto px-margin-desktop">
+      <div class="bg-surface-bright rounded-3xl p-12 md:p-16 border border-outline-variant">
+        <div class="text-center mb-12">
+          <span class="text-primary text-label-md uppercase tracking-wider">Who builds it</span>
+          <h2 class="text-headline-lg mt-2">Made by Techneth.</h2>
+          <p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto mt-3">We build practical tools that take the busywork out of SEO and the web. <!-- TODO: edit this line --></p>
+        </div>
+        <!-- TODO: replace with your real team; swap initials for photos if you like -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter max-w-2xl mx-auto">
+          <div class="flex items-center gap-4 p-5 rounded-2xl border border-outline-variant">
+            <div class="w-14 h-14 rounded-full grid place-items-center text-on-primary text-headline-sm font-bold" style="background:linear-gradient(135deg,#adc7ff,#005bbf);">F</div>
+            <div><div class="text-headline-sm">Fahad</div><div class="text-on-surface-variant text-label-md">Founder &amp; Developer</div><a href="mailto:fahad@techneth.com" class="text-primary text-label-md">fahad@techneth.com</a></div>
+          </div>
+          <div class="flex items-center gap-4 p-5 rounded-2xl border border-outline-variant">
+            <div class="w-14 h-14 rounded-full grid place-items-center text-on-primary text-headline-sm font-bold" style="background:linear-gradient(135deg,#6ddd81,#006d2c);">T</div>
+            <div><div class="text-headline-sm">Techneth</div><div class="text-on-surface-variant text-label-md">Web &amp; software studio</div><a href="https://techneth.com" target="_blank" rel="noopener" class="text-primary text-label-md">techneth.com</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 bg-primary">
+    <div class="max-w-container-max mx-auto px-margin-desktop text-center">
+      <h2 class="text-headline-lg text-on-primary mb-stack-md">Ready to stop reopening Search Console?</h2>
+      <p class="text-primary-fixed text-body-lg mb-stack-lg max-w-xl mx-auto">Add it to Chrome, sign in with Google, and your numbers are one click away.</p>
+      <a id="store-link-cta" href="#" class="inline-flex items-center gap-2 bg-white text-primary px-9 py-3.5 rounded-lg text-headline-sm hover:bg-surface-bright shadow-xl active:scale-95 transition">
+        <span class="material-symbols-outlined">extension</span> Add to Chrome — it's free
+      </a>
+      <p class="text-primary-fixed/70 mt-4 text-label-sm">Read-only · Official Google Search Console API</p>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant py-12">
+  <div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-start">
+    <div>
+      <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined fill text-primary">analytics</span><span class="text-headline-sm font-bold text-primary">Search Console Peek</span></div>
+      <p class="text-on-surface-variant text-body-md max-w-sm">Your Google Search Console performance, in your browser toolbar.</p>
+    </div>
+    <div class="flex flex-wrap md:justify-end gap-x-8 gap-y-3">
+      <a class="text-body-md text-on-surface-variant hover:text-primary" href="privacy.html">Privacy</a>
+      <a class="text-body-md text-on-surface-variant hover:text-primary" href="mailto:fahad@techneth.com">Contact</a>
+    </div>
+    <div class="md:col-span-2 mt-8 pt-8 border-t border-outline-variant">
+      <p class="text-on-surface-variant/70 text-label-sm">© <span id="year"></span> Techneth. Google Search Console is a trademark of Google LLC; this extension is not affiliated with or endorsed by Google.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  // Shadow on scroll.
+  addEventListener("scroll", () => {
+    document.getElementById("site-header").classList.toggle("shadow-md", scrollY > 20);
+  });
+  // TODO: once published, point the "Add to Chrome" links at your Web Store listing.
+  // const url = "https://chromewebstore.google.com/detail/<your-id>";
+  // ["store-link","store-link-top","store-link-cta"].forEach(id => document.getElementById(id).href = url);
+</script>
 </body>
 </html>
