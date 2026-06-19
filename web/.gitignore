@@ -1,0 +1,7 @@
+# This repo holds only the public landing site.
+# Internal/admin and dev files stay out.
+admin.html
+admin.js
+config.js
+styles.css
+README.md
