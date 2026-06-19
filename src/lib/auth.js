@@ -1,14 +1,21 @@
-// OAuth via chrome.identity. Chrome caches and refreshes the token for us,
-// so we just ask for it (non-interactively first, interactively on demand).
+// OAuth via chrome.identity, routed through the background service worker.
+// Why through the background: a popup closes when Google's consent window takes
+// focus, which can abort an in-popup getAuthToken. The service worker never
+// closes, so interactive sign-in completes reliably and Chrome caches the token
+// — the user signs in once and silent refresh handles everything after.
 
 export function getToken({ interactive }) {
   return new Promise((resolve, reject) => {
-    chrome.identity.getAuthToken({ interactive }, (token) => {
-      if (chrome.runtime.lastError || !token) {
-        reject(new Error(chrome.runtime.lastError?.message || "Not signed in"));
+    chrome.runtime.sendMessage({ type: "auth:getToken", interactive }, (res) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError.message));
         return;
       }
-      resolve(token);
+      if (!res || !res.token) {
+        reject(new Error(res?.error || "Not signed in"));
+        return;
+      }
+      resolve(res.token);
     });
   });
 }
@@ -18,7 +25,7 @@ export function getToken({ interactive }) {
 export function removeCachedToken(token) {
   return new Promise((resolve) => {
     if (!token) return resolve();
-    chrome.identity.removeCachedAuthToken({ token }, () => resolve());
+    chrome.runtime.sendMessage({ type: "auth:removeToken", token }, () => resolve());
   });
 }
 

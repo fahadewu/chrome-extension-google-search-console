@@ -23,6 +23,7 @@ const state = {
   // active tab context, captured once at startup
   tabHost: null,
   windowId: null,
+  signedIn: false,
 };
 
 // ---------- Boot ----------
@@ -30,6 +31,15 @@ init();
 
 async function init() {
   bindControls();
+
+  // If sign-in completes in the background (e.g. while this view stayed open),
+  // refresh into the signed-in state automatically.
+  chrome.runtime.onMessage.addListener((msg) => {
+    if (msg?.type === "auth:changed" && !state.signedIn) {
+      getToken({ interactive: false }).then(onSignedIn).catch(() => {});
+    }
+  });
+
   try {
     await getToken({ interactive: false });
     await onSignedIn();
@@ -39,6 +49,7 @@ async function init() {
 }
 
 function showSignedOut(errMsg) {
+  state.signedIn = false;
   $("#dashboard").classList.add("hidden");
   $("#signed-out").classList.remove("hidden");
   const errEl = $("#signin-error");
@@ -51,6 +62,7 @@ function showSignedOut(errMsg) {
 }
 
 async function onSignedIn() {
+  state.signedIn = true;
   $("#signed-out").classList.add("hidden");
   $("#dashboard").classList.remove("hidden");
   await captureActiveTab();

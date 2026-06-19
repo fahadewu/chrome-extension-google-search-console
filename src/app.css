@@ -41,6 +41,7 @@ body {
 .signin-card .logo { font-size: 40px; }
 .signin-card h1 { font-size: 18px; margin: 8px 0 4px; }
 .signin-card p { color: var(--text-dim); font-size: 13px; line-height: 1.5; }
+.signin-hint { font-size: 11px; opacity: .85; margin-top: 12px; }
 
 button.primary {
   background: var(--accent);
