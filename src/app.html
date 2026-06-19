@@ -1,0 +1,75 @@
+<meta charset="utf-8" />
+<title>Search Console Peek</title>
+<link rel="stylesheet" href="app.css" />
+
+<div id="app">
+  <!-- Signed-out state -->
+  <section id="signed-out" class="screen hidden">
+    <div class="signin-card">
+      <div class="logo">📊</div>
+      <h1>Search Console Peek</h1>
+      <p>Connect your Google account to see your Search Console performance right here.</p>
+      <button id="signin-btn" class="primary">Sign in with Google</button>
+      <p id="signin-error" class="error hidden"></p>
+    </div>
+  </section>
+
+  <!-- Main dashboard -->
+  <section id="dashboard" class="screen hidden">
+    <header class="topbar">
+      <select id="site-select" class="site-select" title="Property"></select>
+      <div class="topbar-actions">
+        <button id="expand-btn" class="icon-btn" title="Open in side panel">⇲</button>
+        <button id="refresh-btn" class="icon-btn" title="Refresh">↻</button>
+        <button id="signout-btn" class="icon-btn" title="Sign out">⏻</button>
+      </div>
+    </header>
+
+    <div class="controls">
+      <div class="range-group" id="range-group">
+        <button data-days="7">7d</button>
+        <button data-days="28" class="active">28d</button>
+        <button data-days="90">90d</button>
+      </div>
+      <label class="compare-toggle">
+        <input type="checkbox" id="compare-toggle" checked />
+        <span>Compare</span>
+      </label>
+    </div>
+
+    <p id="range-label" class="range-label"></p>
+
+    <div id="loading" class="loading hidden"><span class="spinner"></span> Loading…</div>
+    <p id="error" class="error hidden"></p>
+
+    <div id="content">
+      <!-- Summary cards -->
+      <div class="cards" id="cards"></div>
+
+      <!-- Trend chart -->
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Trend</h2>
+          <div class="legend">
+            <span class="legend-item"><i class="dot dot-clicks"></i>Clicks</span>
+            <span class="legend-item"><i class="dot dot-impr"></i>Impressions</span>
+          </div>
+        </div>
+        <div id="chart" class="chart"></div>
+      </div>
+
+      <!-- Dimension tables -->
+      <div class="panel">
+        <div class="tab-group" id="dim-tabs">
+          <button data-dim="query" class="active">Queries</button>
+          <button data-dim="page">Pages</button>
+          <button data-dim="country">Countries</button>
+          <button data-dim="device">Devices</button>
+        </div>
+        <div id="table-wrap" class="table-wrap"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="module" src="app.js"></script>
