@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Search Console Peek - Your SEO Dashboard in an Extension</title>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="assets/favicon.svg" rel="apple-touch-icon"/>
+
+<!-- SEO / GEO: canonical/OG/@id use the production domain below -->
+<meta name="description" content="Search Console Peek is a Chrome extension that shows your Google Search Console performance — top queries, pages, trends and period comparisons — in your browser toolbar, without opening Search Console. Built by Algoramming."/>
+<meta name="author" content="Algoramming"/>
+<link rel="canonical" href="https://extension.algoramming.com/search-console-peek/"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Search Console Peek"/>
+<meta property="og:title" content="Search Console Peek — Google Search Console in your toolbar"/>
+<meta property="og:description" content="See your Google Search Console clicks, impressions, top queries, pages and trends — right from your browser, without the round trip. A Chrome extension by Algoramming."/>
+<meta property="og:url" content="https://extension.algoramming.com/search-console-peek/"/>
+<meta property="og:image" content="https://extension.algoramming.com/search-console-peek/assets/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Search Console Peek — a Chrome extension by Algoramming"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Search Console Peek — Google Search Console in your toolbar"/>
+<meta name="twitter:description" content="See your Google Search Console performance right from your browser, without the round trip. A Chrome extension by Algoramming."/>
+<meta name="twitter:image" content="https://extension.algoramming.com/search-console-peek/assets/og-image.png"/>
+
+<!-- Structured data (schema.org) for SEO + AI/generative-engine understanding -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://extension.algoramming.com/search-console-peek/#website",
+      "url": "https://extension.algoramming.com/search-console-peek/",
+      "name": "Search Console Peek",
+      "description": "A Chrome extension that brings Google Search Console performance into your browser toolbar.",
+      "publisher": { "@id": "https://algoramming.com/#organization" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://algoramming.com/#organization",
+      "name": "Algoramming",
+      "alternateName": "Algoramming Software Agency",
+      "url": "https://algoramming.com",
+      "logo": "https://extension.algoramming.com/search-console-peek/assets/favicon.svg",
+      "description": "Custom software development studio based in Dhaka, Bangladesh, building web, mobile and SaaS products end-to-end for clients across 12+ countries.",
+      "email": "support@algoramming.com",
+      "telephone": "+880-1400-629698",
+      "foundingLocation": "Dhaka, Bangladesh",
+      "areaServed": "Worldwide",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "House #12, Road #02, Merul Badda, Anandanagar",
+        "addressLocality": "Dhaka",
+        "postalCode": "1212",
+        "addressCountry": "BD"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "support@algoramming.com",
+        "telephone": "+880-1400-629698",
+        "areaServed": "Worldwide",
+        "availableLanguage": ["en", "bn"]
+      },
+      "sameAs": ["https://github.com/algoramming", "https://algoramming.com"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://extension.algoramming.com/search-console-peek/#sabik",
+      "name": "Md Sabik Alam Rahat",
+      "jobTitle": "Creator & Developer",
+      "url": "https://algoramming.com",
+      "image": "https://extension.algoramming.com/search-console-peek/assets/rahat.png",
+      "email": "rahat@algoramming.com",
+      "worksFor": { "@id": "https://algoramming.com/#organization" },
+      "sameAs": ["https://github.com/sabikrahat", "https://algoramming.com"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://extension.algoramming.com/search-console-peek/#afif",
+      "name": "Afif Alamgir Lizel",
+      "jobTitle": "Creator & Developer",
+      "url": "https://www.afifalamgir.com/",
+      "image": "https://extension.algoramming.com/search-console-peek/assets/afif.png",
+      "email": "afif.alamgir@gmail.com",
+      "worksFor": { "@id": "https://algoramming.com/#organization" },
+      "sameAs": ["https://github.com/afif404", "https://www.afifalamgir.com/"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://extension.algoramming.com/search-console-peek/#fahad",
+      "name": "Md Fahad Mia",
+      "jobTitle": "Creator & Developer",
+      "url": "https://fahad.oracrondigital.com",
+      "image": "https://extension.algoramming.com/search-console-peek/assets/fahad.png",
+      "email": "fahad.wp07@gmail.com",
+      "worksFor": { "@id": "https://algoramming.com/#organization" },
+      "sameAs": ["https://github.com/fahadewu", "https://fahad.oracrondigital.com"]
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://extension.algoramming.com/search-console-peek/#app",
+      "name": "Search Console Peek",
+      "description": "A Chrome extension that shows your Google Search Console performance — clicks, impressions, CTR, position, top queries and pages, trends and period-over-period comparison — in a toolbar popup or Chrome's side panel, using read-only access to the official Search Console API.",
+      "applicationCategory": "BrowserApplication",
+      "operatingSystem": "Chrome",
+      "browserRequirements": "Requires Google Chrome",
+      "url": "https://extension.algoramming.com/search-console-peek/",
+      "image": "https://extension.algoramming.com/search-console-peek/assets/og-image.png",
+      "softwareVersion": "1.0.0",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": [
+        "Top queries and pages",
+        "Clicks, impressions, CTR and average position",
+        "Performance trend over 7, 28 or 90 days",
+        "Current-tab property auto-detection",
+        "Period-over-period comparison",
+        "Popup and side panel"
+      ],
+      "author": [
+        { "@id": "https://extension.algoramming.com/search-console-peek/#sabik" },
+        { "@id": "https://extension.algoramming.com/search-console-peek/#afif" },
+        { "@id": "https://extension.algoramming.com/search-console-peek/#fahad" }
+      ],
+      "publisher": { "@id": "https://algoramming.com/#organization" },
+      "isAccessibleForFree": true
+    }
+  ]
+}
+</script>
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#d8e2ff",
+                    "surface-container-high": "#e5e8ee",
+                    "tertiary-container": "#008939",
+                    "on-tertiary-container": "#ffffff",
+                    "tertiary": "#006d2c",
+                    "surface-container-low": "#f1f4fa",
+                    "primary-fixed-dim": "#adc7ff",
+                    "outline-variant": "#c1c6d6",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#aec7f5",
+                    "tertiary-fixed-dim": "#6ddd81",
+                    "on-tertiary-fixed-variant": "#005320",
+                    "on-secondary-container": "#405880",
+                    "inverse-surface": "#2d3135",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#eef1f7",
+                    "surface-container-highest": "#dfe3e8",
+                    "on-surface-variant": "#414754",
+                    "on-background": "#181c20",
+                    "on-secondary-fixed-variant": "#2e476e",
+                    "secondary-fixed": "#d6e3ff",
+                    "surface-bright": "#f7f9ff",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#004493",
+                    "on-primary-container": "#ffffff",
+                    "tertiary-fixed": "#89fa9b",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f7f9ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001a41",
+                    "primary-container": "#1a73e8",
+                    "surface-variant": "#dfe3e8",
+                    "outline": "#727785",
+                    "surface-dim": "#d7dae0",
+                    "secondary": "#465f87",
+                    "secondary-container": "#b7d0fe",
+                    "on-primary": "#ffffff",
+                    "primary": "#005bbf",
+                    "error": "#ba1a1a",
+                    "background": "#f7f9ff",
+                    "surface-container": "#ebeef4",
+                    "surface-tint": "#005bc0",
+                    "on-secondary-fixed": "#001b3c",
+                    "inverse-primary": "#adc7ff",
+                    "on-surface": "#181c20",
+                    "on-tertiary-fixed": "#002108"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "margin-desktop": "40px",
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "margin-mobile": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "label-sm": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "label-md": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .extension-shadow {
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        }
+        .glass-header {
+            backdrop-filter: blur(8px);
+        }
+        .dark-ui-mockup {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary { list-style: none; }
+        .faq-chevron { transition: transform .2s ease; }
+        details[open] .faq-chevron { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="max-w-container-max mx-auto px-margin-desktop flex items-center justify-between h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-headline-md" style='font-variation-settings: "FILL" 1;'>analytics</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Search Console Peek</span>
+</div>
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-secondary-container hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#features">Features</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-secondary-container hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#how-it-works">How it Works</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-secondary-container hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#about">About</a>
+</nav>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded-lg active:scale-95 transition-transform hover:shadow-md">
+                Add to Chrome
+            </button>
+</div>
+</header>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-24 pb-32 md:pt-32 md:pb-40">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+<div class="z-10 text-center lg:text-left">
+<h1 class="font-display-lg text-display-lg mb-stack-md text-on-surface leading-tight">
+                        Your Search Console <span class="text-primary">Dashboard in a Peek</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg max-w-xl mx-auto lg:mx-0">
+                        Connect via secure Google OAuth and view real-time SEO performance without leaving your current tab. Search Console Peek brings GSC intelligence directly into your browser workflow.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+<button class="flex items-center justify-center gap-2 bg-primary text-on-primary px-8 py-4 rounded-lg font-headline-md text-headline-md hover:bg-primary/90 transition-all shadow-lg active:scale-95">
+<span class="material-symbols-outlined">extension</span>
+                            Add to Chrome
+                        </button>
+<button class="flex items-center justify-center gap-2 border-2 border-primary text-primary px-8 py-4 rounded-lg font-headline-md text-headline-md hover:bg-primary/5 transition-all active:scale-95">
+                            See How it Works
+                        </button>
+</div>
+</div>
+<div class="relative mt-12 lg:mt-0 flex justify-center">
+<!-- Browser & Extension UI Mockup -->
+<div class="relative z-10 w-full max-w-[480px] aspect-[4/5] bg-white rounded-xl shadow-2xl border border-outline-variant overflow-hidden">
+<!-- Browser Header -->
+<div class="h-10 bg-surface-container-high border-b border-outline-variant flex items-center px-4 gap-2">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+</div>
+<div class="flex-grow bg-white h-6 rounded px-2 text-[10px] flex items-center text-on-surface-variant truncate mx-4">
+                                google.com/search-console/performance
+                            </div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-primary-container text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">analytics</span>
+</div>
+</div>
+</div>
+<!-- Extension UI Rendered inside mockup -->
+<div class="p-4 h-full bg-[#0d1117] overflow-hidden">
+<img alt="Search Console Peek Dark Dashboard Extension UI" class="w-full h-auto rounded-lg shadow-inner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwjsHboAKvfDDkfTmJpzvpGxJWojJT0edsuFFM09kxWmwncA-TBIcOUgAzfl22y4JhgaxsjgpRUqPt4qODHh8bJd-S3j4v2s35Jpoe1oWZP-qdAAUsU2v-me0-il4Qy3M-ffd3GBleG5evW0x_pPPrku9bhuqob4RWyIM1tf6hUxyxx0NvWaA7awJpGs1UDtGKikz5-YOVjmEclOZoFOvtnSf6ZSmOo9hWpWcLlNtZP5hh3Kd74psSSfhI_RzMBug_ZGECB0GqI9w"/>
+</div>
+</div>
+<!-- Decorative Background element -->
+<div class="absolute -top-10 -right-10 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+<!-- Interaction Modes / How It Works -->
+<section class="py-24 bg-surface-container-lowest" id="how-it-works">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-stack-sm text-on-surface">Seamless Interaction Modes</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Designed to fit naturally into your SEO workflow with two core experiences.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Mode 1: Login -->
+<div class="bg-white border border-outline-variant rounded-2xl overflow-hidden shadow-sm flex flex-col">
+<div class="p-8 flex-grow">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center font-bold text-white">1</div>
+<h3 class="font-headline-md text-headline-md">The Secure Login</h3>
+</div>
+<p class="text-on-surface-variant mb-8">Get started in seconds with a familiar, high-security environment. Use the official 'Sign in with Google' flow to grant read-only access to your Search Console properties without ever sharing your credentials.</p>
+<div class="bg-[#0d1117] p-6 rounded-xl border border-outline-variant/30">
+<img alt="Search Console Peek Login Interface" class="w-full max-w-[280px] mx-auto rounded shadow-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbVO0MT9YcwmfdZRTkidr7bLVfS5bXDXooTVjCPdioewrB16R_P0OZuA8o2Bkp54uk-Jy9zFwH8ecZS0BTWIw9CHkYBAmS5Y_I-n0XuHY5iTvfZau_7jh8L5LxC6wjEUB0_5gTBefikdejg5pR5uJEhk1Qx5FuEOALN0_yw2L1J0d8cAVLudxK8ZAjnPiVnxrFohKHpOtS3Ygoyj28LRahDVcD6vc7luF9sUgIA5ntAhh-oiNvCIKiUnnDVOE1RV4-A1oIkZpbZmY"/>
+</div>
+</div>
+</div>
+<!-- Mode 2: Sidebar -->
+<div class="bg-white border border-outline-variant rounded-2xl overflow-hidden shadow-sm flex flex-col">
+<div class="p-8 flex-grow">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center font-bold text-white">2</div>
+<h3 class="font-headline-md text-headline-md">Persistent Sidebar Docking</h3>
+</div>
+<p class="text-on-surface-variant mb-8">Click the 'down arrow' icon to dock the entire dashboard panel to your browser's sidebar. This keeps your SEO data persistent and visible while you browse your site or analyze competitors.</p>
+<div class="bg-[#0d1117] p-6 rounded-xl border border-outline-variant/30 relative">
+<img alt="Sidebar Docking Interface" class="w-full h-auto object-cover rounded shadow-lg max-h-[160px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHS5poq5rG_hrNZNEcjVkfY6_w12hpbtJOc1AJ-olquz4r5hbGV2vPAb33E82fXIbrkofhOwP8A1WgVb4f9zSoWfB9MDU2brstPS3yET7B_0Qw2BR3jZQWreYcG66fWMJclJANvnaHud9JWrqknxQiuuTsffp3DbsxO9Yv0_uGI4p_e9Bnkwx5UkrKi3LKpi3eLO1URqBt_OAB18Q-oy7aYyLW9BrQMjWzCwud28EXYSQtWZXOru0rUaDzZ0z6FiCymsq5_wRzggQ"/>
+<div class="absolute top-8 right-8 animate-pulse">
+<span class="material-symbols-outlined text-primary-fixed-dim text-3xl">keyboard_double_arrow_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section class="py-24 bg-background" id="api-advantage">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-stack-sm text-on-surface">The Direct API Advantage</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Experience the power of raw data precision compared to standard web interfaces.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+<!-- Comparison Cards -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Standard GSC -->
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-high opacity-60 grayscale">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-sm uppercase tracking-wider text-on-surface-variant">Standard GSC Dashboard</span>
+<span class="material-symbols-outlined text-on-surface-variant">schedule</span>
+</div>
+<div class="h-2 bg-outline-variant rounded-full w-3/4 mb-2"></div>
+<div class="h-2 bg-outline-variant rounded-full w-1/2"></div>
+<p class="mt-4 text-label-sm text-on-surface-variant">Delayed, Aggregated Data</p>
+</div>
+<!-- Search Console Peek -->
+<div class="p-6 rounded-xl border-2 border-primary bg-white shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary text-on-primary px-3 py-1 text-[10px] font-bold uppercase">Live</div>
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-sm uppercase tracking-wider text-primary font-bold">Search Console Peek API</span>
+<span class="material-symbols-outlined text-tertiary animate-pulse">bolt</span>
+</div>
+<div class="h-2 bg-primary/20 rounded-full w-full mb-2">
+<div class="h-full bg-primary rounded-full w-full"></div>
+</div>
+<div class="h-2 bg-primary/20 rounded-full w-3/4">
+<div class="h-full bg-tertiary rounded-full w-3/4"></div>
+</div>
+<p class="mt-4 text-label-sm text-primary font-bold">Real-time, High-Precision Data</p>
+</div>
+</div>
+<!-- Bullet Points -->
+<div class="flex flex-col gap-8">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined">speed</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-1">Zero Lag</h4>
+<p class="text-on-surface-variant">Get your data as it happens, not days later. Our API bridge bypasses standard processing delays.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined">grid_view</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-1">Higher Granularity</h4>
+<p class="text-on-surface-variant">Access raw API metrics that the web interface often aggregates or hides from view.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-1">Pure Accuracy</h4>
+<p class="text-on-surface-variant">Direct server-to-server connection ensures no data loss or rounding discrepancies found in standard reports.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Focus -->
+<section class="py-24" id="features">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-stack-sm text-on-surface">Data Integration, Redefined</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">No manual exports, no data formatting. Just your Search Console data, where you need it.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Feature 1 -->
+<div class="p-stack-lg bg-white border border-outline-variant rounded-xl hover:shadow-lg transition-all group">
+<div class="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-stack-md group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>dashboard</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Real-time Dashboard</h3>
+<p class="text-on-surface-variant font-body-md">A compact, powerful dashboard built directly into your browser extension. Check Clicks, CTR, and Position in one click.</p>
+</div>
+<!-- Feature 2 -->
+<div class="p-stack-lg bg-white border border-outline-variant rounded-xl hover:shadow-lg transition-all group">
+<div class="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-stack-md group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>sync</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Direct GSC Integration</h3>
+<p class="text-on-surface-variant font-body-md">Native API connection means your data is always fresh. No lag, no manual syncing between platforms.</p>
+</div>
+<!-- Feature 3 -->
+<div class="p-stack-lg bg-white border border-outline-variant rounded-xl hover:shadow-lg transition-all group">
+<div class="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-stack-md group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>verified_user</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Privacy-First OAuth</h3>
+<p class="text-on-surface-variant font-body-md">We use industry-standard Google OAuth. We never see your password, and you can revoke access at any time.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Meet the Team -->
+<section class="py-24 bg-surface-container-low" id="about">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="bg-white rounded-3xl p-12 md:p-20 border border-outline-variant shadow-sm">
+<div class="text-center mb-12">
+<span class="text-primary font-label-md uppercase tracking-wider mb-2 block">The Experts Behind the Tool</span>
+<h2 class="font-headline-lg text-headline-lg">Meet the Team</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto mt-3">The crew behind Search Console Peek, building software at <a class="text-primary hover:underline" href="https://algoramming.com" target="_blank" rel="noopener">Algoramming</a>.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Person 1 -->
+<div class="text-center">
+<div class="w-40 h-40 mx-auto rounded-2xl overflow-hidden border-4 border-surface shadow-md mb-6">
+<img alt="Md Sabik Alam Rahat — Creator and Developer of Search Console Peek at Algoramming" class="w-full h-full object-cover" src="assets/rahat.png"/>
+</div>
+<h4 class="font-headline-md text-headline-md">Md Sabik Alam Rahat</h4>
+<p class="text-primary font-label-sm uppercase mb-3">Creator &amp; Developer</p>
+<div class="flex justify-center gap-5 text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="https://algoramming.com" target="_blank" rel="noopener" title="Portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg></a>
+<a class="hover:text-primary transition-colors" href="https://github.com/sabikrahat" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.74.5 12.04c0 5.1 3.29 9.41 7.86 10.94.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A10.56 10.56 0 0 0 23.5 12.04C23.5 5.74 18.27.5 12 .5z"/></svg></a>
+<a class="hover:text-primary transition-colors" href="mailto:rahat@algoramming.com" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></a>
+</div>
+</div>
+<!-- Person 2 -->
+<div class="text-center">
+<div class="w-40 h-40 mx-auto rounded-2xl overflow-hidden border-4 border-surface shadow-md mb-6">
+<img alt="Afif Alamgir Lizel — Creator and Developer of Search Console Peek at Algoramming" class="w-full h-full object-cover" src="assets/afif.png"/>
+</div>
+<h4 class="font-headline-md text-headline-md">Afif Alamgir Lizel</h4>
+<p class="text-primary font-label-sm uppercase mb-3">Creator &amp; Developer</p>
+<div class="flex justify-center gap-5 text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="https://www.afifalamgir.com/" target="_blank" rel="noopener" title="Portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg></a>
+<a class="hover:text-primary transition-colors" href="https://github.com/afif404" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.74.5 12.04c0 5.1 3.29 9.41 7.86 10.94.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A10.56 10.56 0 0 0 23.5 12.04C23.5 5.74 18.27.5 12 .5z"/></svg></a>
+<a class="hover:text-primary transition-colors" href="mailto:afif.alamgir@gmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></a>
+</div>
+</div>
+<!-- Person 3 -->
+<div class="text-center">
+<div class="w-40 h-40 mx-auto rounded-2xl overflow-hidden border-4 border-surface shadow-md mb-6">
+<img alt="Md Fahad Mia — Creator and Developer of Search Console Peek at Algoramming" class="w-full h-full object-cover" src="assets/fahad.png"/>
+</div>
+<h4 class="font-headline-md text-headline-md">Md Fahad Mia</h4>
+<p class="text-primary font-label-sm uppercase mb-3">Creator &amp; Developer</p>
+<div class="flex justify-center gap-5 text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="https://fahad.oracrondigital.com" target="_blank" rel="noopener" title="Portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg></a>
+<a class="hover:text-primary transition-colors" href="https://github.com/fahadewu" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.74.5 12.04c0 5.1 3.29 9.41 7.86 10.94.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A10.56 10.56 0 0 0 23.5 12.04C23.5 5.74 18.27.5 12 .5z"/></svg></a>
+<a class="hover:text-primary transition-colors" href="mailto:fahad.wp07@gmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></a>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant flex justify-center gap-8">
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="https://algoramming.com" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>
+<span class="font-label-md">algoramming.com</span>
+</a>
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="https://github.com/algoramming" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.74.5 12.04c0 5.1 3.29 9.41 7.86 10.94.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A10.56 10.56 0 0 0 23.5 12.04C23.5 5.74 18.27.5 12 .5z"/></svg>
+<span class="font-label-md">GitHub Org</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-24 bg-surface-container-lowest border-t border-outline-variant" id="faq">
+<div class="max-w-3xl mx-auto px-margin-desktop">
+<div class="text-center mb-12">
+<span class="text-primary font-label-md uppercase tracking-wider">FAQ</span>
+<h2 class="font-headline-lg text-headline-lg mt-2 text-on-surface">Frequently asked questions</h2>
+</div>
+<div class="flex flex-col gap-3">
+<details class="group bg-white border border-outline-variant rounded-xl px-6 py-4">
+<summary class="flex justify-between items-center gap-4 cursor-pointer font-headline-sm text-headline-sm text-on-surface">
+<span>What is Search Console Peek?</span>
+<span class="material-symbols-outlined faq-chevron text-on-surface-variant">expand_more</span>
+</summary>
+<p class="text-on-surface-variant text-body-md mt-3">Search Console Peek is a Chrome extension that shows your Google Search Console performance — clicks, impressions, CTR, position, top queries and pages, trends and period-over-period comparisons — in a toolbar popup or Chrome's side panel, without opening Search Console.</p>
+</details>
+<details class="group bg-white border border-outline-variant rounded-xl px-6 py-4">
+<summary class="flex justify-between items-center gap-4 cursor-pointer font-headline-sm text-headline-sm text-on-surface">
+<span>Is Search Console Peek free?</span>
+<span class="material-symbols-outlined faq-chevron text-on-surface-variant">expand_more</span>
+</summary>
+<p class="text-on-surface-variant text-body-md mt-3">Yes. Search Console Peek is free to install and use.</p>
+</details>
+<details class="group bg-white border border-outline-variant rounded-xl px-6 py-4">
+<summary class="flex justify-between items-center gap-4 cursor-pointer font-headline-sm text-headline-sm text-on-surface">
+<span>What data does it access, and is it safe?</span>
+<span class="material-symbols-outlined faq-chevron text-on-surface-variant">expand_more</span>
+</summary>
+<p class="text-on-surface-variant text-body-md mt-3">It uses read-only access to your own Search Console properties through Google's official sign-in. It never sees your password, your data stays in Google, and you can revoke access at any time from your Google Account permissions.</p>
+</details>
+<details class="group bg-white border border-outline-variant rounded-xl px-6 py-4">
+<summary class="flex justify-between items-center gap-4 cursor-pointer font-headline-sm text-headline-sm text-on-surface">
+<span>Do I need a Google Search Console account?</span>
+<span class="material-symbols-outlined faq-chevron text-on-surface-variant">expand_more</span>
+</summary>
+<p class="text-on-surface-variant text-body-md mt-3">Yes. You sign in with the Google account that has access to your Search Console properties, and the extension displays data for those properties.</p>
+</details>
+<details class="group bg-white border border-outline-variant rounded-xl px-6 py-4">
+<summary class="flex justify-between items-center gap-4 cursor-pointer font-headline-sm text-headline-sm text-on-surface">
+<span>How fresh is the data?</span>
+<span class="material-symbols-outlined faq-chevron text-on-surface-variant">expand_more</span>
+</summary>
+<p class="text-on-surface-variant text-body-md mt-3">The extension shows the same data as Google Search Console, which Google typically finalizes a couple of days behind. Figures reflect what Google's API returns and may update as Google finalizes them.</p>
+</details>
+<details class="group bg-white border border-outline-variant rounded-xl px-6 py-4">
+<summary class="flex justify-between items-center gap-4 cursor-pointer font-headline-sm text-headline-sm text-on-surface">
+<span>Can I keep it open while I browse?</span>
+<span class="material-symbols-outlined faq-chevron text-on-surface-variant">expand_more</span>
+</summary>
+<p class="text-on-surface-variant text-body-md mt-3">Yes. Open it as a toolbar popup, or dock it in Chrome's side panel so it stays visible alongside the page you're viewing.</p>
+</details>
+<details class="group bg-white border border-outline-variant rounded-xl px-6 py-4">
+<summary class="flex justify-between items-center gap-4 cursor-pointer font-headline-sm text-headline-sm text-on-surface">
+<span>Who builds Search Console Peek?</span>
+<span class="material-symbols-outlined faq-chevron text-on-surface-variant">expand_more</span>
+</summary>
+<p class="text-on-surface-variant text-body-md mt-3">It is built by Algoramming, a custom software studio based in Dhaka, Bangladesh.</p>
+</details>
+</div>
+</div>
+</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://extension.algoramming.com/search-console-peek/#faq",
+  "isPartOf": { "@id": "https://extension.algoramming.com/search-console-peek/#website" },
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Search Console Peek?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Search Console Peek is a Chrome extension that shows your Google Search Console performance — clicks, impressions, CTR, position, top queries and pages, trends and period-over-period comparisons — in a toolbar popup or Chrome's side panel, without opening Search Console." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Search Console Peek free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Search Console Peek is free to install and use." }
+    },
+    {
+      "@type": "Question",
+      "name": "What data does it access, and is it safe?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It uses read-only access to your own Search Console properties through Google's official sign-in. It never sees your password, your data stays in Google, and you can revoke access at any time from your Google Account permissions." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a Google Search Console account?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. You sign in with the Google account that has access to your Search Console properties, and the extension displays data for those properties." }
+    },
+    {
+      "@type": "Question",
+      "name": "How fresh is the data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The extension shows the same data as Google Search Console, which Google typically finalizes a couple of days behind. Figures reflect what Google's API returns and may update as Google finalizes them." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I keep it open while I browse?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Open it as a toolbar popup, or dock it in Chrome's side panel so it stays visible alongside the page you're viewing." }
+    },
+    {
+      "@type": "Question",
+      "name": "Who builds Search Console Peek?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It is built by Algoramming, a custom software studio based in Dhaka, Bangladesh." }
+    }
+  ]
+}
+</script>
+
+<!-- CTA Section -->
+<section class="py-24 relative overflow-hidden bg-primary">
+<div class="max-w-container-max mx-auto px-margin-desktop text-center relative z-10">
+<h2 class="font-display-lg text-display-lg text-on-primary mb-stack-md">Ready for a Better Search Console Experience?</h2>
+<p class="text-primary-fixed font-body-lg mb-stack-lg max-w-xl mx-auto">
+                    Join 10,000+ SEO professionals who trust Search Console Peek for seamless data access.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-white text-primary px-10 py-4 rounded-lg font-headline-md text-headline-md hover:bg-surface-bright transition-all shadow-xl active:scale-95">
+                        Add to Chrome — It's Free
+                    </button>
+<button class="border border-white/30 text-on-primary px-10 py-4 rounded-lg font-headline-md text-headline-md hover:bg-white/10 transition-all active:scale-95">
+                        Enterprise Solutions
+                    </button>
+</div>
+<p class="text-primary-fixed/60 mt-stack-md text-label-sm">Privacy guaranteed. Official Google API integration.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest w-full py-12 border-t border-outline-variant dark:border-outline">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-headline-sm" style='font-variation-settings: "FILL" 1;'>analytics</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed-dim">Search Console Peek</span>
+</div>
+<p class="text-on-surface-variant font-body-md max-w-sm">
+                    Bringing pro-grade Google Search Console analytics directly to your browser.
+                </p>
+<p class="text-on-surface-variant font-body-md max-w-sm mt-3">
+                    Crafted by <a class="text-primary hover:underline" href="https://algoramming.com" target="_blank" rel="noopener">Algoramming</a> — a custom software studio in Dhaka, Bangladesh, building web, mobile, and SaaS products end-to-end for clients across 12+ countries.
+                </p>
+</div>
+<div class="flex flex-wrap md:justify-end gap-x-8 gap-y-4">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-container hover:underline decoration-primary" href="privacy.html">Privacy</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-container hover:underline decoration-primary" href="terms.html">Terms</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-container hover:underline decoration-primary" href="#">Security</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-container hover:underline decoration-primary" href="#">Twitter</a>
+</div>
+<div class="md:col-span-2 mt-8 pt-8 border-t border-outline-variant text-center md:text-left">
+<p class="text-on-surface-variant/60 font-label-sm">
+                    © 2026 Search Console Peek by Algoramming. Built with security and performance in mind. Google Search Console is a trademark of Google LLC; this extension is not affiliated with or endorsed by Google.
+                </p>
+</div>
+</div>
+</footer>
+<script>
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+                header.classList.remove('shadow-sm');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.add('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

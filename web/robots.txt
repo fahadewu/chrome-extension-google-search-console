@@ -17,4 +17,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://algoramming.github.io/google_chrome_extensions_landing_page/sitemap.xml
+Sitemap: https://extension.algoramming.com/sitemap.xml
