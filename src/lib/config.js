@@ -13,8 +13,8 @@ export const CONFIG = {
   // Must match this app's ingest_key in the `apps` table.
   ingestKey: "REPLACE_WITH_INGEST_KEY",
 
-  // Public privacy policy (the deployed web/privacy.html).
-  privacyUrl: "https://YOUR_SITE/privacy.html",
+  // Public privacy policy (the deployed landing site).
+  privacyUrl: "https://extensions.algoramming.com/search-console-peek/privacy.html",
 };
 
 export function reportingConfigured() {
