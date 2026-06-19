@@ -1,0 +1,6 @@
+# Never commit or ship the signing key — anyone with it can impersonate the extension.
+key.pem
+*.pem
+
+# Build output
+dist/
