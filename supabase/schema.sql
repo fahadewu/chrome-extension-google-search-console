@@ -155,6 +155,16 @@ end;
 $$;
 
 -- ---------------------------------------------------------------------------
+-- Lock down the RPCs. Postgres grants EXECUTE to PUBLIC on new functions by
+-- default, which would let anyone with the public anon key call these
+-- SECURITY DEFINER functions directly via /rest/v1/rpc, bypassing the
+-- edge function's ingest-key check. Revoke PUBLIC so only the service_role
+-- (used by the edge functions) can invoke them.
+-- ---------------------------------------------------------------------------
+revoke execute on function public.record_user(text, text, text, text, text, jsonb) from public;
+revoke execute on function public.log_event(text, uuid, text, jsonb) from public;
+
+-- ---------------------------------------------------------------------------
 -- Register this extension. Replace the ingest key with a long random string
 -- (e.g. `openssl rand -hex 24`) and use the SAME value in src/lib/config.js.
 -- To add a future product later, just insert another row here.
